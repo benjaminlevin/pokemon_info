@@ -327,21 +327,6 @@
           "lib/netstandard1.3/Microsoft.AspNetCore.Http.Features.dll": {}
         }
       },
-      "Microsoft.AspNetCore.HttpOverrides/1.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNetCore.Http.Extensions": "1.1.2",
-          "Microsoft.Extensions.Logging.Abstractions": "1.1.2",
-          "Microsoft.Extensions.Options": "1.1.2",
-          "NETStandard.Library": "1.6.1"
-        },
-        "compile": {
-          "lib/netstandard1.3/Microsoft.AspNetCore.HttpOverrides.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/Microsoft.AspNetCore.HttpOverrides.dll": {}
-        }
-      },
       "Microsoft.AspNetCore.JsonPatch/1.1.2": {
         "type": "package",
         "dependencies": {
@@ -650,24 +635,8 @@
           "lib/netstandard1.3/Microsoft.AspNetCore.Routing.Abstractions.dll": {}
         }
       },
-      "Microsoft.AspNetCore.Server.IISIntegration/1.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNetCore.Hosting.Abstractions": "1.1.2",
-          "Microsoft.AspNetCore.Http": "1.1.2",
-          "Microsoft.AspNetCore.Http.Extensions": "1.1.2",
-          "Microsoft.AspNetCore.HttpOverrides": "1.1.2",
-          "Microsoft.Extensions.Logging.Abstractions": "1.1.2",
-          "Microsoft.Extensions.Options": "1.1.2",
-          "NETStandard.Library": "1.6.1",
-          "System.Security.Principal.Windows": "4.3.0"
-        },
-        "compile": {
-          "lib/netstandard1.3/Microsoft.AspNetCore.Server.IISIntegration.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/Microsoft.AspNetCore.Server.IISIntegration.dll": {}
-        }
+      "Microsoft.AspNetCore.Server.IISIntegration/2.0.0": {
+        "type": "package"
       },
       "Microsoft.AspNetCore.Server.Kestrel/1.1.2": {
         "type": "package",
@@ -3784,19 +3753,6 @@
         "microsoft.aspnetcore.http.features.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.HttpOverrides/1.1.2": {
-      "sha512": "mLvAW4lo6ma/gZUsZA3ercDpZejMFmCI7YBIKWIStzUTAtOcJzysHGRPAPhMuq4EnKhBmbCBar3p/Mog2xcL/g==",
-      "type": "package",
-      "path": "microsoft.aspnetcore.httpoverrides/1.1.2",
-      "files": [
-        "lib/net451/Microsoft.AspNetCore.HttpOverrides.dll",
-        "lib/net451/Microsoft.AspNetCore.HttpOverrides.xml",
-        "lib/netstandard1.3/Microsoft.AspNetCore.HttpOverrides.dll",
-        "lib/netstandard1.3/Microsoft.AspNetCore.HttpOverrides.xml",
-        "microsoft.aspnetcore.httpoverrides.1.1.2.nupkg.sha512",
-        "microsoft.aspnetcore.httpoverrides.nuspec"
-      ]
-    },
     "Microsoft.AspNetCore.JsonPatch/1.1.2": {
       "sha512": "2WwfwZ1TI7Bqhum0EnnQpymlUri31mzqerm+DGq5oMEVhNW8iWnkJonEkDhISDruCL6D7B4JfRgXz9AaKNE0iA==",
       "type": "package",
@@ -4044,16 +4000,14 @@
         "microsoft.aspnetcore.routing.abstractions.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.Server.IISIntegration/1.1.2": {
-      "sha512": "KizxcJViFeVFpeyjwRDVJ2MCXmti6qc80JWHaJU9MBaNTCC2BvChyREyUrRPOfduJcGItzqB0uvfPk0aOaKslg==",
+    "Microsoft.AspNetCore.Server.IISIntegration/2.0.0": {
+      "sha512": "2ucubupqXkVxzOOsXVpc0YOm8SQuja467tXWk9ox5tDvbVCa5koI3XQxol1QF3hFOlVbpJIjZ/MMtCVoSohBqw==",
       "type": "package",
-      "path": "microsoft.aspnetcore.server.iisintegration/1.1.2",
+      "path": "microsoft.aspnetcore.server.iisintegration/2.0.0",
       "files": [
-        "lib/net451/Microsoft.AspNetCore.Server.IISIntegration.dll",
-        "lib/net451/Microsoft.AspNetCore.Server.IISIntegration.xml",
-        "lib/netstandard1.3/Microsoft.AspNetCore.Server.IISIntegration.dll",
-        "lib/netstandard1.3/Microsoft.AspNetCore.Server.IISIntegration.xml",
-        "microsoft.aspnetcore.server.iisintegration.1.1.2.nupkg.sha512",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Server.IISIntegration.dll",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Server.IISIntegration.xml",
+        "microsoft.aspnetcore.server.iisintegration.2.0.0.nupkg.sha512",
         "microsoft.aspnetcore.server.iisintegration.nuspec"
       ]
     },
@@ -9575,6 +9529,7 @@
       "Microsoft.AspNetCore >= 1.1.2",
       "Microsoft.AspNetCore.Http >= 1.1.2",
       "Microsoft.AspNetCore.Mvc >= 1.1.3",
+      "Microsoft.AspNetCore.Server.IISIntegration >= 2.0.0",
       "Microsoft.AspNetCore.Session >= 1.1.2",
       "Microsoft.AspNetCore.StaticFiles >= 1.1.2",
       "Microsoft.NETCore.App >= 1.1.2"
@@ -9629,6 +9584,10 @@
           "Microsoft.AspNetCore.Http": {
             "target": "Package",
             "version": "1.1.2"
+          },
+          "Microsoft.AspNetCore.Server.IISIntegration": {
+            "target": "Package",
+            "version": "2.0.0"
           }
         }
       }
