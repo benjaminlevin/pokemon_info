@@ -1,0 +1,33 @@
+<div>
+    <h1>@ViewBag.Pokemon.Name</h1>
+    <h3>Types:</h3>
+    <ul>
+    @foreach( var type in @ViewBag.Types)
+    {
+        <li>@type</li>
+    }
+    </ul>
+    <h3>Height: @ViewBag.Pokemon.Height</h3>
+    <h3>Weight: @ViewBag.Pokemon.Weight</h3>
+</div>
+
+using Microsoft.AspNetCore.Mvc;
+
+<!-- namespace PokeInfo
+{
+    public class PokeController : Controller
+    {
+        [HttpGet]
+        [Route("pokeinfo/{id}")]
+        public IActionResult GetInfo(int id)
+        {
+            var PokeObject = new Pokemon();
+
+            WebRequest.GetPokemonDataAsync(id, PokeResponse => {
+                PokeObject = PokeResponse;
+            }).Wait();
+            ViewBag.Pokemon = PokeObject;
+            return View();
+        }
+    }
+} -->

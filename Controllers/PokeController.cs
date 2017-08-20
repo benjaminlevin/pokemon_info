@@ -27,45 +27,81 @@ using Newtonsoft.Json;
     public class PokeController : Controller{
         [Route("/")]
         public IActionResult Index() {
+            // var test = new Dictionary<string, object>();
+            // WebRequestEx.GetPokemonDataAsyncEx(2, PokeInfo =>
+            // {
+            //     test = PokeInfo;
+            //     Console.WriteLine(test);
+            // }
+            //     ).Wait();
             return View("index");
         }
 
         [HttpPost]
         [Route("/pokemon")]
-        public IActionResult ID(int pID){
-            int PokeId = pID;
-            return Redirect("/pokemon/" + pID);
-        }
-
-        [Route("/pokemon/{pID}")]
-        public IActionResult Info(int pID){
-            var PokeInfo = new JObject();
-            WebRequest.GetPokemonDataAsync(pID, ApiResponse =>
-                {
-                    PokeInfo = ApiResponse;
-                }
-            ).Wait();
-
-            if(PokeInfo["name"] == null){
+        public IActionResult ID(int pID)
+        {
+            if((pID > 0) && (pID < 722))
+            {
+                return Redirect("/pokemon/" + pID);
+            }
+            else
+            {
                 return Redirect("/");
             }
-            else{
-                if(PokeInfo["types"].Count() > 1){
-                    string sType = (string)PokeInfo["types"][1]["type"]["name"];
-                    ViewBag.sType = sType.First().ToString().ToUpper() + sType.Substring(1);
-                }
+        }
 
+        [HttpGet]
+        [Route("/pokemon")]
+        public IActionResult Inv()
+        {
+            return Redirect("/");
+        }
+        
+        [Route("/pokemon/{pID}")]
+        public IActionResult Info(int pID){
+            var pokemon = new Dictionary<string, object>();
+            if((pID < 1) || (pID > 721))
+            {
+                return Redirect("/");
+            }
+            WebRequest.GetPokemonDataAsync(pID, PokeInfo =>
+            {
+                var tempType = new List<string>();
+                var tempSprite = new List<string>();
                 string name = (string)PokeInfo["name"];
                 string pType = (string)PokeInfo["types"][0]["type"]["name"];
-
-                ViewBag.Name = name.First().ToString().ToUpper() + name.Substring(1);
-                ViewBag.pType = pType.First().ToString().ToUpper() + pType.Substring(1);
-                ViewBag.Height = (string)PokeInfo["height"];
-                ViewBag.Weight = (string)PokeInfo["weight"];
-                ViewBag.PokeInfo = PokeInfo;
-                return View("info");
+                pokemon["Name"] = (name.First().ToString().ToUpper() + name.Substring(1));
+                pokemon["Height"] = (string)PokeInfo["height"];
+                pokemon["Weight"] = (string)PokeInfo["weight"];
+                for(int i=0; i<PokeInfo["types"].Count(); i++){
+                    string tWord = (string)PokeInfo["types"][i]["type"]["name"];
+                    tempType.Add(tWord.First().ToString().ToUpper() + tWord.Substring(1));
+                }
+                var spriteURL = new Dictionary<string,object>();
+                spriteURL = PokeInfo["sprites"].ToObject<Dictionary<string, object>>();
+                foreach(KeyValuePair<string,object> entry in spriteURL)
+                {
+                    if (entry.Value != null)
+                    {
+                        tempSprite.Add(entry.Value as string);
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                pokemon["Types"] = tempType;
+                pokemon["Sprites"] = tempSprite;
             }
-        }
+            ).Wait();
+            ViewBag.Name = (string)pokemon["Name"];
+            ViewBag.Types = (List<string>)pokemon["Types"];
+            ViewBag.Height = (string)pokemon["Height"];
+            ViewBag.Weight = (string)pokemon["Weight"];
+            ViewBag.Sprites = (List<string>)pokemon["Sprites"];
+            return View("info");  
+        }  
 
     [HttpGet]
     [Route("/random")]
@@ -76,34 +112,34 @@ using Newtonsoft.Json;
             var pokemon = new Dictionary<string, object>();
             WebRequest.GetPokemonDataAsync(randNum, PokeInfo =>
             {
-                var temp = new List<string>();
+                var tempType = new List<string>();
+                var tempSprite = new List<string>();
                 string name = (string)PokeInfo["name"];
-                string pType = (string)PokeInfo["types"][0]["type"]["name"];
                 pokemon["name"] = name.First().ToString().ToUpper() + name.Substring(1);
-                pokemon["primary_type"] = pType.First().ToString().ToUpper() + pType.Substring(1);
-                if(PokeInfo["types"].Count() > 1)
-                {
-                    string sType = (string)PokeInfo["types"][1]["type"]["name"];
-                    pokemon["secondary_type"] = sType.First().ToString().ToUpper() + sType.Substring(1);
-                }
                 pokemon["height"] = (string)PokeInfo["height"];
                 pokemon["weight"] = (string)PokeInfo["weight"];
-
                 for(int i=0; i<PokeInfo["types"].Count(); i++){
                     string tWord = (string)PokeInfo["types"][i]["type"]["name"];
-                    temp.Add(tWord.First().ToString().ToUpper() + tWord.Substring(1));
+                    tempType.Add(tWord.First().ToString().ToUpper() + tWord.Substring(1));
                 }
-                pokemon["types"] = temp;
+                pokemon["types"] = tempType;
+                var spriteURL = new Dictionary<string,object>();
+                spriteURL = PokeInfo["sprites"].ToObject<Dictionary<string, object>>();
+                foreach(KeyValuePair<string,object> entry in spriteURL)
+                {
+                    if (entry.Value != null)
+                    {
+                        tempSprite.Add(entry.Value as string);
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
-            ).Wait();
-            if(pokemon["name"] == null)
-            {
-                return Redirect("/");
+                pokemon["sprites"] = tempSprite;
             }
-            else
-            {
-                return Json(pokemon);  
-            } 
+            ).Wait();
+            return Json(pokemon);   
         }  
     }
 }
