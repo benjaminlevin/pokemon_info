@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" contetn="ie=edge">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <title>Pokémon | @ViewBag.Name</title>
+    </head>
+    <body>
+        <h3>Name: @ViewBag.Name</h3>
+        <h3>Primary Type: @ViewBag.pType</h3>
+        @if(ViewBag.sType != null){<h3>Secondary Type: @ViewBag.sType</h3>}
+        <h3>Height: @ViewBag.Height</h3>
+        <h3>Weight: @ViewBag.Weight</h3>
+        <a href='/'><button type=''>home</button></a>
+        <button id="random">Random Pokémon</button>
+        <div class="Info">
+        </div>
+        <script>
+            $(document).ready(function(){
+                $("button").click(function(){
+                    var id =$(this).html();
+                    $.get(
+                        "/random",
+                        (res) => {
+                            console.log(res);
+                            var str = "";
+                            str += "<h5>Name: " + res.name + "</h5>";
+                            str += "<h5> Primary Type: " + res.primary_type + "</h5>";
+                            if(res.secondary_type != null){
+                                str += "<h5> Secondary Type: " + res.secondary_type + "</h5>";
+                            }
+                            str += "<h5> Height: " + res.height + "</h5>";
+                            str += "<h5> Weight: " + res.weight + "</h5>";
+                            str += "<h6> All Types: </h6><ul>"
+                            var i = 0;
+                            while(i<res.types.length){
+                                str += "<ol>" + res.types[i] + "</ol>"
+                                i++;
+                            }
+                            str += "</ul>"
+                            $(".Info").html(str);
+                        }
+                    )
+                });
+            });
+        </script>
+    </body>
+</html>

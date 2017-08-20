@@ -1,0 +1,8 @@
+/Users/benlevin/Desktop/DojoAssignments/csharp/week_3/pokeInfo/bin/Debug/netcoreapp1.1/pokeInfo.deps.json
+/Users/benlevin/Desktop/DojoAssignments/csharp/week_3/pokeInfo/bin/Debug/netcoreapp1.1/pokeInfo.runtimeconfig.json
+/Users/benlevin/Desktop/DojoAssignments/csharp/week_3/pokeInfo/bin/Debug/netcoreapp1.1/pokeInfo.runtimeconfig.dev.json
+/Users/benlevin/Desktop/DojoAssignments/csharp/week_3/pokeInfo/bin/Debug/netcoreapp1.1/pokeInfo.dll
+/Users/benlevin/Desktop/DojoAssignments/csharp/week_3/pokeInfo/bin/Debug/netcoreapp1.1/pokeInfo.pdb
+/Users/benlevin/Desktop/DojoAssignments/csharp/week_3/pokeInfo/obj/Debug/netcoreapp1.1/pokeInfo.AssemblyInfo.cs
+/Users/benlevin/Desktop/DojoAssignments/csharp/week_3/pokeInfo/obj/Debug/netcoreapp1.1/pokeInfo.dll
+/Users/benlevin/Desktop/DojoAssignments/csharp/week_3/pokeInfo/obj/Debug/netcoreapp1.1/pokeInfo.pdb
